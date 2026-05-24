@@ -77,7 +77,6 @@ let fixedMarkdown = MarkdownTableFixer.fixTableDelimiters(in: rawMarkdown)
 ## 局限性
 
 - 只处理以 `|` 开头/结尾的表格（GFM 宽松语法中省略首尾 `|` 的表格不处理）
-- 分隔行补齐时使用 `|---|`（不保留原始对齐标记 `:---:` 的精确格式）
 - 不支持多行单元格（cmark 本身也不支持）
 
 ## License
