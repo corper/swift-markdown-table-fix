@@ -73,6 +73,56 @@ final class MarkdownTableFixerTests: XCTestCase {
         XCTAssertEqual(MarkdownTableFixer.fixTableDelimiters(in: input), expected)
     }
 
+    // MARK: - 对齐标记保留
+
+    func testLeftAlignmentPreserved() {
+        let input = """
+        | A | B | C |
+        |:---|:---|
+        """
+        let expected = """
+        | A | B | C |
+        |:---|:---|:---|
+        """
+        XCTAssertEqual(MarkdownTableFixer.fixTableDelimiters(in: input), expected)
+    }
+
+    func testRightAlignmentPreserved() {
+        let input = """
+        | A | B | C |
+        |---:|---:|
+        """
+        let expected = """
+        | A | B | C |
+        |---:|---:|---:|
+        """
+        XCTAssertEqual(MarkdownTableFixer.fixTableDelimiters(in: input), expected)
+    }
+
+    func testCenterAlignmentPreserved() {
+        let input = """
+        | A | B | C |
+        |:---:|:---:|
+        """
+        let expected = """
+        | A | B | C |
+        |:---:|:---:|:---:|
+        """
+        XCTAssertEqual(MarkdownTableFixer.fixTableDelimiters(in: input), expected)
+    }
+
+    func testMixedAlignmentPreserved() {
+        let input = """
+        | A | B | C | D |
+        |:---|---:|:---:|
+        """
+        let expected = """
+        | A | B | C | D |
+        |:---|---:|:---:|:---|
+        """
+        XCTAssertEqual(MarkdownTableFixer.fixTableDelimiters(in: input), expected)
+    }
+
     // MARK: - 不应修改
 
     func testCodeBlockSkipped() {
